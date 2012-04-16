@@ -1,0 +1,192 @@
+
+.colorWheelContainer {
+	width:800px;
+	height:700px;
+	position:relative;
+	> label {font-size:20px;
+		position:static; left:243px;
+		html.sass & {
+			&:after {color:$colorwheel1; content: "#{$colorwheel1}";} 
+		}
+	}
+	> footer {width:400px; margin: 0 auto; margin-top: 50px;}
+}
+.colorWheel {
+	position:relative;
+	width:100%;
+	text-align:center;
+
+	.wheel {
+		margin:0 auto;
+		position:relative;
+		width:500px;
+		height:500px;
+		> nav {
+			position:absolute;
+			left:218px;
+			ul { list-style:none;
+				li {
+					@include inline-block;
+					position:static;
+					
+					html.sass & {
+						&.complement {background-color:complement($colorwheel1); span:before {content:"complement: #{complement($colorwheel1)} " };}
+						&.invert {background-color:invert($colorwheel1); span:before {content:"invert: #{complement($colorwheel1)} " };}
+						&.grayscale {background-color:grayscale($colorwheel1); span:before {content:"grayscale: #{complement($colorwheel1)} " };}
+					}
+
+				}
+			}
+			&.relationships {
+				display:none;
+				bottom:44px;
+				left:190px;
+				html.sass {
+					display:block;
+				}
+			}
+		}
+		ul {
+			li {
+				width:50px;
+				height:50px;
+				display:block;
+				position:absolute;	
+				@include border-radius(50%);
+
+			}
+		}
+		> ul {
+			position:relative;
+			margin: 250px 0 0 250px;
+			li {				
+				background-color:$colorwheel1;				
+				@include hueAdjust($colorwheel1);			
+				margin: 0 0 0 -10px;								
+			}
+		}
+		> .currentColor {
+			position:absolute; 
+			top:175px;
+			left:127px;
+			width: 271px;
+
+			.swatch { width:100px; height:100px; margin:0 auto; display:block; margin-bottom:10px;}
+		}
+
+	}
+
+	.strip {
+		position:absolute;
+		top:40px;
+		right:0;
+		
+		&.light {
+			ul {float:right;}
+			li {
+				$light : lightness($colorwheel1);
+				@for $i from 0 through 10 {
+					&:nth-child(#{$i + 1}){
+						$startBackground: lighten($colorwheel1, 100);
+						$val: $i * 10;
+						background: darken($startBackground, $val );
+						span {margin-left:0; right:55px;}
+						
+						html.sass & {span:after {content: "lightness: #{$val} \A color: #{darken($startBackground, $val )}";}}
+					}				
+				}
+			}
+		}
+		&.sat {
+			left:0;
+			right:auto;
+			
+			li {
+				$sat : saturation($colorwheel1);
+				@for $i from 0 through 10 {
+					&:nth-child(#{$i + 1}){
+						$startBackground: desaturate($colorwheel1, 100);
+						$val: $i * 10;
+						background: saturate($startBackground, $val );
+						
+						html.sass & {span:after {content: "saturation: #{$val} \A color: #{saturate($startBackground, $val )}";}}
+					}				
+				}
+			}
+		}
+		ul {
+			li {width:50px; height:50px; 
+
+				border-top:1px solid #999; 
+				border-left:1px solid #333;
+				border-right:1px solid #333;		
+
+			$light : lightness($colorwheel1);
+			@for $i from 0 through 10 {
+				&:nth-child(#{$i + 1}){
+					$startBackground: lighten($colorwheel1, 100);
+					$val: $i * 10;
+					background: darken($startBackground, $val );
+					//span:after {content: "lightness: #{$val} color: #{darken($startBackground, $val )}";}
+				}				
+			}
+		}
+		}
+	}
+
+	nav.stats {
+		top:50px;
+		ul {height:auto;}
+		li {color:#000; font-size:15px; 
+			width:auto;
+			height:auto;
+			position:static;
+			margin-bottom:10px; 
+			white-space: nowrap;
+			&.swatch {@include box-shadow(1px 1px 0 #333);}
+			&.swatchColor{ font-size:1.5em; font-weight:bold; @include text-shadow(1px 1px 0 #333);} 
+
+			&.hue, &.sat, &.light {@include inline-block; color:#999;
+				i {color:#000; font-weight:bold;}
+			}
+			
+			html.sass & {
+				&.hue:after {content: "#{round(hue($colorwheel1))}"}
+				&.sat:after {content: "#{round(saturation($colorwheel1))}"}
+				&.light:after {content: "#{round(lightness($colorwheel1))}"}	
+			}
+			
+		}
+	}
+
+	ul {
+			li {
+				cursor:pointer;
+				
+
+				&.scheme {@include scale(1.5);}
+
+				span {
+					display:none;
+					position:absolute;
+				}
+				&:hover {
+					//@include scale(2);
+					z-index:1000;
+
+					span {
+						display:block; 
+						position:absolute; 
+						width: 150px; 
+						margin-left:50px; 
+						background:lighten($context,60%);
+						@include background-image(linear-gradient(lighten($context,60%), lighten($context, 30%)));
+						border:3px solid $context;
+						padding:10px;
+						@include border-radius(10px);	 					
+						@include box-shadow(0 0 10px #333 );
+					}
+				}
+			}
+		}
+}

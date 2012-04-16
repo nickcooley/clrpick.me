@@ -1,0 +1,94 @@
+
+
+@mixin hueAdjust($color){
+	// Increments should be divisible by 360.
+	$i: 360;
+	$incDeg: 360/$i;	
+	@while $i >= 0 {
+		&:nth-child(#{$i + 1}){
+			$deg: $i * $incDeg; 
+			$background: '';
+			$comment: " ";
+			@if $deg == 360{
+				@include scale(1.5);
+				$background: $color;
+				$comment: $comment + 'Original Color: ';
+			}
+			@else if $deg%120 == 0 {
+				html.sass & {@include scale(1.5);}
+				$background: adjust-hue($color, $deg);
+				$comment: $comment + 'Triad: ';
+			}
+			@else if $deg%180 == 0 {
+				html.sass & {@include scale(1.5);}
+				$background: adjust-hue($color, $deg);	
+				$comment: $comment + 'Complement: ';
+			}
+			@else {
+				$background: adjust-hue($color, $deg);				
+			}
+			background: $background;
+			&:hover {
+				border:3px solid black;				
+				span {
+					margin-left:0;
+					@if($deg < 110 ){ 
+						
+						top:-100px;
+					}
+					@else if($deg < 190){
+						right:70px; 
+					}
+					@else if($deg < 229){
+						right:60px;
+						top: 10px;
+					}
+					@else if($deg < 230){
+						right:60px;
+						top: 10px;
+					}
+					@else if($deg < 270){
+						right:60px;
+						top: 20px;
+					}
+					@else if($deg < 300){
+						left:70px;
+						top: 10px;
+					}
+					@else if ($deg < 361){
+						left:70px;												
+					}
+				}
+				
+			}
+			
+			@include circlefy(200, $deg);
+			html.sass & { span:before {content: "#{$comment} #{$deg} deg  #{$background}";}}
+		}
+		$i: $i - 1;
+	}
+} 
+
+
+/* Compass trig math inspired by: http://snipt.net/guttersleeper/ */
+
+@mixin circlefy($radius, $deg, $boxRad:250 ){	
+	$rad: angleToRadians($deg);
+	@include radiansToCartesian($rad, $radius);		
+}
+
+@function angleToRadians($a){
+	$pi: pi();
+	$angle: ($a * -1) / 180;
+	//$angle: ($a) / 180;
+	$radians: $pi * $angle;
+	@return $radians;
+}
+
+@mixin radiansToCartesian($r, $radius){
+	$x: round($radius * cos($r));
+	$y: round($radius * sin($r));
+
+	top: #{$y}px;
+	left:#{$x}px;
+}

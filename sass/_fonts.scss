@@ -1,0 +1,34 @@
+/*  _fonts.scss */
+
+
+@font-face {
+ 	font-family: 'Chunk-Five';
+ 	src: url('../lib/fonts/ChunkFive-fontfacekit/Chunkfive-webfont.eot?#iefix') format('embedded-opentype'),
+ 	 	 url('../lib/fonts/ChunkFive-fontfacekit/Chunkfive-webfont.woff') format('woff'),
+		 url('../lib/fonts/ChunkFive-fontfacekit/Chunkfive-webfont.ttf') format('truetype'),
+		 url('../lib/fonts/ChunkFive-fontfacekit/Chunkfive-webfont.svg#webfont90E2uSjN') format('svg');
+}
+
+@font-face {
+ 	font-family: 'Droid-Sans-Bold';
+ 	src: url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+ 	 	 url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-Bold-webfont.woff') format('woff'),
+		 url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-Bold-webfont.ttf') format('truetype'),
+		 url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-Bold-webfont.svg#DroidSansBold') format('svg');
+}
+
+@font-face {
+ 	font-family: 'Droid-Sans';
+ 	src: url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
+ 	 	 url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-webfont.woff') format('woff'),
+		 url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-webfont.ttf') format('truetype'),
+		 url('../lib/fonts/Droid-Sans-fontfacekit/DroidSans-webfont.svg#DroidSans') format('svg');
+}
+
+@font-face {
+ 	font-family: 'League-Gothic';
+ 	src: url('../lib/fonts/League-Gothic-fontfacekit/League_Gothic-webfont.eot?#iefix') format('embedded-opentype'),
+ 	 	 url('../lib/fonts/League-Gothic-fontfacekit/League_Gothic-webfont.woff') format('woff'),
+		 url('../lib/fonts/League-Gothic-fontfacekit/League_Gothic-webfont.ttf') format('truetype'),
+		 url('../lib/fonts/League-Gothic-fontfacekit/League_Gothic-webfont.svg#webfontFHzvtkso') format('svg');
+}

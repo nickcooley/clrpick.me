@@ -1,0 +1,158 @@
+/* Color Wheel App .scss -- 
+
+
+
+-- MIT License --
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+
+@import "fonts";
+@import "mixins";
+
+$colorwheel1: #33adff; 
+$context: grayscale($colorwheel1);
+ 
+
+ 
+
+h1, h2, h3, h4 {font-weight:bold; margin-bottom:.5em; text-align:center; font-family: 'League-Gothic';  
+		@include text-shadow(
+		1px 1px 0 invert($colorwheel1))
+
+}
+h1{font-size: 3em; text-align:left;}
+h2 {font-size: 2.75em;}
+h3 {font-size:2em;}
+h4 {font-size: 1.7em;}
+
+a {color: darken($colorwheel1, 30%); text-decoration:none;  &:hover {text-decoration:underline;}}
+p {margin-bottom:10px;}
+ol {list-style-type:decimal;
+	li {margin-bottom:10px;}
+} 
+
+form.schemes {
+	@include column-count(2);
+}
+
+
+@-webkit-keyframes hoverColor {
+	from {
+		width:40px; 
+		height:40px;}
+	to {width:100px;
+		height:100px;}
+}
+
+
+body {text-align:center; font-family: Arial, Helvetica, sans-serif; 
+	//@include background-image(linear-gradient(#fff, #000));
+	/* Pattern courtesy of http://lea.verou.me/demos/css3-patterns.html */
+	@include background-size(50px 50px);	
+
+	background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #fff), color-stop(.25, transparent), to(transparent)),
+					  -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #fff), color-stop(.25, transparent), to(transparent)),
+					  -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #fff)),
+	  				  -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #fff));
+	background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent),
+					  -webkit-linear-gradient(-45deg, #fff 25%, transparent 25%, transparent),
+					  -webkit-linear-gradient(45deg, transparent 75%, #fff 75%),
+	  				  -webkit-linear-gradient(-45deg, transparent 75%, #fff 75%);
+	background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent),
+					  -moz-linear-gradient(-45deg, #fff 25%, transparent 25%, transparent),
+					  -moz-linear-gradient(45deg, transparent 75%, #fff 75%),
+	  				  -moz-linear-gradient(-45deg, transparent 75%, #fff 75%);
+	background-image: -ms-linear-gradient(45deg, #fff 25%, transparent 25%, transparent),
+					  -ms-linear-gradient(-45deg, #fff 25%, transparent 25%, transparent),
+					  -ms-linear-gradient(45deg, transparent 75%, #fff 75%),
+	  				  -ms-linear-gradient(-45deg, transparent 75%, #fff 75%);			
+
+}
+div#container {width:800px; margin:0 auto; text-align:left; padding:30px;
+
+	background:#fff;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+
+	@include box-shadow(0 0 50px #333);
+
+	> header, > section, > form {
+		margin-bottom:1em;
+	}	
+}
+
+header { 
+	@extend #clearfix;
+	border-bottom:1px solid #e5e5e5;
+	h1 {margin-bottom:.2em; float:left; margin-top:0;} 
+	> nav { float:right; margin-top:1em;
+		
+		li {@include inline-block;  margin-left:1em;  
+			a {font-family: 'League-Gothic'; font-size:2em;}
+
+			&:after {
+				content:"";
+			}
+		}
+	}
+}  
+span.logo {font-family: 'Chunk-Five'; font-size:142px;   
+	@include text-shadow(
+		2px 2px 0 $colorwheel1, 
+		5px 5px 0 complement($colorwheel1),
+		8px 8px 0 invert($colorwheel1));
+}	 
+
+section.flyout {
+	padding:30px;
+	position:absolute; 
+	z-index:1000;
+	width:740px; 
+	display:none;
+	background: lighten($context,60%);
+	@include background-image(linear-gradient(lighten($context,60%), lighten($context, 30%)));
+	@include box-shadow(0 3px 10px #333);
+
+	p {line-height: 1.5em; margin-bottom:1em;}
+
+	ul { margin-bottom:2em;
+		li {margin-bottom:1em;}
+	}
+
+	.close {
+		position:absolute;
+		right:0;
+		top:0;
+		background:#ccc;
+		font-family:Arial, Helvetica, sans-serif;
+		padding:5px;
+		cursor:pointer;
+		&:after {
+			content: "x";
+		}
+	}
+
+}
+
+fieldset.newColor {text-align:center; 
+		label {@include inline-block;}
+		span {color:#999; font-size:.8em;} 
+		input {padding:10px; font-size:15px;}
+		button {padding:9px; @include border-radius(5px 5px); background:darken($colorwheel1, 20%); @include background-image(linear-gradient($colorwheel1, darken($colorwheel1, 20%))); font-size:15px; color:#fff;}  
+	}
+
+body > footer { background: #fff;  padding:10px; margin-top:20px;
+	li {@include inline-block; margin: 0 20px; font-size:.7em;}
+}
+
+#clearfix {@include pie-clearfix;}
